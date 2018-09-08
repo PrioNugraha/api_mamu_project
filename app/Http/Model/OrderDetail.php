@@ -5,8 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $idOrder
- * @property int $idProduct
+ * @property int $id_order
+ * @property int $id_product
  * @property int $quantity
  * @property Order $order
  * @property Product $product
@@ -23,14 +23,14 @@ class OrderDetail extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idOrder', 'idProduct', 'quantity'];
+    protected $fillable = ['id_order', 'id_product', 'quantity'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function order()
     {
-        return $this->belongsTo('App\Order', 'idOrder', 'idOrder');
+        return $this->belongsTo('App\Order', 'id_order', 'id_order');
     }
 
     /**
@@ -38,6 +38,6 @@ class OrderDetail extends Model
      */
     public function product()
     {
-        return $this->belongsTo('App\Product', 'idProduct', 'idProduct');
+        return $this->belongsTo('App\Product', 'id_product', 'id_product');
     }
 }

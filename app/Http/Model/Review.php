@@ -5,12 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $idReview
- * @property int $idProduct
- * @property int $idCustomer
- * @property float $rate
- * @property string $description
+ * @property int $id_review
+ * @property int $id_customer
+ * @property int $id_product
  * @property string $dateReview
+ * @property string $description
+ * @property float $rate
  * @property Customer $customer
  * @property Product $product
  */
@@ -28,19 +28,19 @@ class Review extends Model
      * 
      * @var string
      */
-    protected $primaryKey = 'idReview';
+    protected $primaryKey = 'id_review';
 
     /**
      * @var array
      */
-    protected $fillable = ['idProduct', 'idCustomer', 'rate', 'description', 'dateReview'];
+    protected $fillable = ['id_customer', 'id_product', 'dateReview', 'description', 'rate'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function customer()
     {
-        return $this->belongsTo('App\Customer', 'idCustomer', 'idCustomer');
+        return $this->belongsTo('App\Customer', 'id_customer', 'id_customer');
     }
 
     /**
@@ -48,6 +48,6 @@ class Review extends Model
      */
     public function product()
     {
-        return $this->belongsTo('App\Product', 'idProduct', 'idProduct');
+        return $this->belongsTo('App\Product', 'id_product', 'id_product');
     }
 }

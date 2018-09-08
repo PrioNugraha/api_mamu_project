@@ -5,14 +5,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $idCustomer
- * @property string $idUser
- * @property string $firstName
- * @property string $lastName
- * @property string $mobile
+ * @property int $id_customer
+ * @property int $id_user
+ * @property string $create_date
  * @property string $email
- * @property string $createDate
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $mobile
  * @property User $user
+ * @property Review[] $reviews
  */
 class Customer extends Model
 {
@@ -28,18 +29,26 @@ class Customer extends Model
      * 
      * @var string
      */
-    protected $primaryKey = 'idCustomer';
+    protected $primaryKey = 'id_customer';
 
     /**
      * @var array
      */
-    protected $fillable = ['idUser', 'firstName', 'lastName', 'mobile', 'email', 'createDate'];
+    protected $fillable = ['id_user', 'create_date', 'email', 'first_name', 'last_name', 'mobile'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo('App\User', 'idUser', 'idUser');
+        return $this->belongsTo('App\User', 'id_user', 'id_user');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review', 'id_customer', 'id_customer');
     }
 }

@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $idSeat
- * @property int $idMerchant
- * @property int $seatNumber
+ * @property int $id_seat
+ * @property int $id_merchant
  * @property int $capacity
  * @property boolean $reserved
+ * @property int $seat_number
  * @property Merchant $merchant
  * @property Order[] $orders
  */
@@ -27,19 +27,19 @@ class Seat extends Model
      * 
      * @var string
      */
-    protected $primaryKey = 'idSeat';
+    protected $primaryKey = 'id_seat';
 
     /**
      * @var array
      */
-    protected $fillable = ['idMerchant', 'seatNumber', 'capacity', 'reserved'];
+    protected $fillable = ['id_merchant', 'capacity', 'reserved', 'seat_number'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function merchant()
     {
-        return $this->belongsTo('App\Merchant', 'idMerchant', 'idMerchant');
+        return $this->belongsTo('App\Merchant', 'id_merchant', 'id_merchant');
     }
 
     /**
@@ -47,6 +47,6 @@ class Seat extends Model
      */
     public function orders()
     {
-        return $this->hasMany('App\Order', 'idSeat', 'idSeat');
+        return $this->hasMany('App\Order', 'id_seat', 'id_seat');
     }
 }

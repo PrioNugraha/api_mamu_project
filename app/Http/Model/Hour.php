@@ -5,22 +5,22 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $idHour
- * @property int $idBranch
- * @property string $seninOpen
- * @property string $seninClose
- * @property string $selasaOpen
- * @property string $selasaClose
- * @property string $rabuOpen
- * @property string $rabuClose
- * @property string $kamisOpen
- * @property string $kamisClose
- * @property string $jumatOpen
- * @property string $jumatClose
- * @property string $sabtuOpen
- * @property string $sabtuClose
- * @property string $mingguOpen
- * @property string $mingguClose
+ * @property int $id_hour
+ * @property int $id_branch
+ * @property string $jumat_close
+ * @property string $jumat_open
+ * @property string $kamis_close
+ * @property string $kamis_open
+ * @property string $minggu_close
+ * @property string $minggu_open
+ * @property string $rabu_close
+ * @property string $rabu_open
+ * @property string $sabtu_close
+ * @property string $sabtu_open
+ * @property string $selasa_close
+ * @property string $selasa_open
+ * @property string $senin_close
+ * @property string $senin_open
  * @property MerchantBranch $merchantBranch
  */
 class Hour extends Model
@@ -37,18 +37,18 @@ class Hour extends Model
      * 
      * @var string
      */
-    protected $primaryKey = 'idHour';
+    protected $primaryKey = 'id_hour';
 
     /**
      * @var array
      */
-    protected $fillable = ['idBranch', 'seninOpen', 'seninClose', 'selasaOpen', 'selasaClose', 'rabuOpen', 'rabuClose', 'kamisOpen', 'kamisClose', 'jumatOpen', 'jumatClose', 'sabtuOpen', 'sabtuClose', 'mingguOpen', 'mingguClose'];
+    protected $fillable = ['id_branch', 'jumat_close', 'jumat_open', 'kamis_close', 'kamis_open', 'minggu_close', 'minggu_open', 'rabu_close', 'rabu_open', 'sabtu_close', 'sabtu_open', 'selasa_close', 'selasa_open', 'senin_close', 'senin_open'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function merchantBranch()
     {
-        return $this->belongsTo('App\MerchantBranch', 'idBranch', 'idBranch');
+        return $this->belongsTo('App\MerchantBranch', 'id_branch', 'id_branch');
     }
 }

@@ -5,13 +5,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $idBranch
- * @property int $idMerchant
+ * @property int $id_branch
+ * @property int $id_merchant
  * @property string $address
  * @property string $city
  * @property string $mobile
  * @property string $phone
  * @property Merchant $merchant
+ * @property Day[] $days
+ * @property Hour[] $hours
  */
 class MerchantBranch extends Model
 {
@@ -27,18 +29,34 @@ class MerchantBranch extends Model
      * 
      * @var string
      */
-    protected $primaryKey = 'idBranch';
+    protected $primaryKey = 'id_branch';
 
     /**
      * @var array
      */
-    protected $fillable = ['idMerchant', 'address', 'city', 'mobile', 'phone'];
+    protected $fillable = ['id_merchant', 'address', 'city', 'mobile', 'phone'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function merchant()
     {
-        return $this->belongsTo('App\Merchant', 'idMerchant', 'idMerchant');
+        return $this->belongsTo('App\Merchant', 'id_merchant', 'id_merchant');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function days()
+    {
+        return $this->hasMany('App\Day', 'id_branch', 'id_branch');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function hours()
+    {
+        return $this->hasMany('App\Hour', 'id_branch', 'id_branch');
     }
 }
