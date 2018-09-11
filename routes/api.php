@@ -18,6 +18,8 @@ Route::group([
 ], function(){
     // Route::post('login', 'AuthController@login');
     Route::post('signup_customer','AuthController@signupCust');
+    Route::post('login_customer','AuthController@loginCust');
+    
     Route::group([
         'middleware' => 'auth:api'
     ],function(){

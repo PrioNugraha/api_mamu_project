@@ -1,8 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
 
 /**
  * @property int $id_user
@@ -17,8 +21,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property Customer[] $customers
  * @property Merchant[] $merchants
  */
-class User extends Model
+class User extends Authenticatable
 {
+    use Notifiable, HasApiTokens;
+
     /**
      * The table associated with the model.
      * 
@@ -36,22 +42,23 @@ class User extends Model
     /**
      * @var array
      */
-    protected $fillable = ['created_at', 'email', 'last_login', 'password', 'prev_password', 'remember_token', 'updated_at'];
+    protected $fillable = ['created_at', 'email', 'last_login', 'updated_at','password','prev_password'];
 
+    protected $hidden = ['password', 'prev_password', 'remember_token'];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function userRoles()
+    public function userRole()
     {
-        return $this->hasMany('App\UserRole', 'id_user', 'id_user');
+        return $this->hasOne('App\Http\Model\UserRole', 'id_user', 'id_user');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function customers()
+    public function customer()
     {
-        return $this->hasMany('App\Customer', 'id_user', 'id_user');
+        return $this->hasOne('App\Http\Model\Customer', 'id_user', 'id_user');
     }
 
     /**
@@ -59,6 +66,6 @@ class User extends Model
      */
     public function merchants()
     {
-        return $this->hasMany('App\Merchant', 'id_user', 'id_user');
+        return $this->hasMany('App\Http\Model\Merchant', 'id_user', 'id_user');
     }
 }

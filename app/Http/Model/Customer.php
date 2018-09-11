@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_customer
  * @property int $id_user
  * @property string $create_date
- * @property string $email
  * @property string $first_name
  * @property string $last_name
  * @property string $mobile
@@ -34,14 +33,14 @@ class Customer extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_user', 'create_date', 'email', 'first_name', 'last_name', 'mobile'];
+    protected $fillable = ['id_user', 'create_date', 'first_name', 'last_name', 'mobile'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo('App\User', 'id_user', 'id_user');
+        return $this->belongsTo('App\Http\Model\User', 'id_user', 'id_user');
     }
 
     /**
