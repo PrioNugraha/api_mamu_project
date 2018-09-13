@@ -19,12 +19,20 @@ Route::group([
     // Route::post('login', 'AuthController@login');
     Route::post('signup_customer','AuthController@signupCust');
     Route::post('login_customer','AuthController@loginCust');
-    
+    Route::get('signup/activate/{token}', 'AuthController@signupActivate');
     Route::group([
         'middleware' => 'auth:api'
     ],function(){
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
     });
-
+});
+Route::group([    
+    'namespace' => 'Auth',    
+    'middleware' => 'api',    
+    'prefix' => 'password'
+], function () {    
+    Route::post('create', 'PasswordResetController@create');
+    Route::get('find/{token}', 'PasswordResetController@find');
+    Route::post('reset', 'PasswordResetController@reset');
 });

@@ -25,6 +25,7 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
 
+    protected $dates = ['deleted_at'];
     /**
      * The table associated with the model.
      * 
@@ -42,9 +43,9 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $fillable = ['created_at', 'email', 'last_login', 'updated_at','password','prev_password'];
+    protected $fillable = ['created_at', 'email', 'last_login', 'updated_at','password','prev_password', 'active', 'activation_token'];
 
-    protected $hidden = ['password', 'prev_password', 'remember_token'];
+    protected $hidden = ['password', 'prev_password', 'remember_token','activation_token'];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
